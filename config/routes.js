@@ -10,6 +10,7 @@
 
 module.exports.routes = {
 
-  'get /departure/:from/:to/:date': 'DepartureController.get'
+  'get /departure/:from/:to/:date': 'DepartureController.get',
+  'get /stop': 'StopController.get'
 
 };

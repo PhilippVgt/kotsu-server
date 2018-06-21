@@ -6,7 +6,10 @@
  */
 
 module.exports = {
-  
+
+  get: async function (req, res) {
+    var stops = await Stop.find().sort("id ASC");
+    res.send(stops);
+  }
 
 };
-

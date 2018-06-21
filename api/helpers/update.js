@@ -13,21 +13,23 @@ module.exports = {
 
       var countKotsu = 0;
       var countKate = 0;
+      var unloaded = 0;
 
       for(const fromStop of stops) {
         for(const toStop of stops) {
 
           const loaded = await Loaded.find({origin: fromStop.id, destination: toStop.id, date: date});
           if(loaded.length == 0) {
+            unloaded ++;
             if(fromStop.code == 100001 || fromStop.code == 100002 || toStop.code == 100001 || toStop.code == 100002) {
               var departures = await sails.helpers.kate.with({from: fromStop.code, to: toStop.code, date: date});
               if(departures) {
-                countKotsu += departures.length
+                countKate += departures.length
               }
             } else {
               var departures = await sails.helpers.kotsu.with({from: fromStop.code, to: toStop.code, date: date});
               if(departures) {
-                countKate += departures.length
+                countKotsu += departures.length
               }
             }
           } else {
@@ -37,7 +39,9 @@ module.exports = {
         }
       }
 
-      await sails.helpers.email.with({kotsu: countKotsu, kate: countKate, date: date});
+      if(unloaded > 0) {
+        await sails.helpers.email.with({kotsu: countKotsu, kate: countKate, date: date});
+      }
     }
 
     return exits.success();
