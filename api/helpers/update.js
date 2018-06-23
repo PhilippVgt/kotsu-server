@@ -24,12 +24,12 @@ module.exports = {
             if(fromStop.code == 100001 || fromStop.code == 100002 || toStop.code == 100001 || toStop.code == 100002) {
               var departures = await sails.helpers.kate.with({from: fromStop.code, to: toStop.code, date: date});
               if(departures) {
-                countKate += departures.length
+                countKate += departures.length;
               }
             } else {
               var departures = await sails.helpers.kotsu.with({from: fromStop.code, to: toStop.code, date: date});
               if(departures) {
-                countKotsu += departures.length
+                countKotsu += departures.length;
               }
             }
           } else {

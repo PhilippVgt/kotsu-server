@@ -11,6 +11,7 @@
 module.exports.routes = {
 
   'get /departure/:from/:to/:date': 'DepartureController.get',
+  'get /connection': 'DepartureController.mesh',
   'get /stop': 'StopController.get'
 
 };

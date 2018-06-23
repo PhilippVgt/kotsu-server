@@ -24,6 +24,27 @@ module.exports = {
       }
     }
     res.send(departures);
+  },
+
+  mesh: async function (req, res) {
+    const stops = await Stop.find().sort("id ASC");
+
+    var connections = []
+    var i = 0;
+    for(const fromStop of stops) {
+      for(const toStop of stops) {
+        var departures = await Departure.count({origin: fromStop.id, destination: toStop.id});
+        if(departures > 0) {
+          connections[i] = {
+            from: fromStop,
+            to: toStop
+          };
+          i++;
+        }
+      }
+    }
+
+    res.send(connections);
   }
 
 };

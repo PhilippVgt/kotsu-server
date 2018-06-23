@@ -95,9 +95,9 @@ module.exports = {
         console.log(departures.length + " departures loaded");
         await Departure.createEach(departures);
         await Loaded.create({origin: fromStop.id, destination: toStop.id, date: inputs.date});
-        departures = await Departure.find(departures.map(d => d.id))
-                            .populate('origin').populate('destination')
-                            .populate('terminal').populate('via');
+        departures = await Departure.find({origin: fromStop.id, destination: toStop.id, date: inputs.date})
+                                        .populate('origin').populate('destination')
+                                        .populate('terminal').populate('via');
         return exits.success(departures);
       } else {
         console.log("No departures");
