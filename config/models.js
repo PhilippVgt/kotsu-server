@@ -69,7 +69,7 @@ module.exports.models = {
   ***************************************************************************/
 
   attributes: {
-    id: { type: 'number', autoIncrement: true }
+    id: { type: 'string', columnName: '_id' }
     //--------------------------------------------------------------------------
     //  /\   Using MongoDB?
     //  ||   Replace `id` above with this instead:
