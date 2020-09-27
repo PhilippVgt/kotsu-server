@@ -32,7 +32,7 @@ module.exports = {
   datastores: {
     default: {
       adapter: 'sails-mysql',
-      url: 'mysql://mphsoft:Arc4sweQuigry@localhost:3306/mphsoft_kotsu',
+      url: 'mysql://mphsoft:di0D2YJ:d1CdACT9Lywh@localhost:3306/mphsoft_kotsu',
     },
 
   },
