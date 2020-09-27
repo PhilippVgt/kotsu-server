@@ -31,8 +31,12 @@ module.exports = {
   **************************************************************************/
   datastores: {
     default: {
-      adapter: 'sails-mysql',
-      url: 'mysql://mphsoft:<REPLACE_PASSWORD>@localhost:3306/mphsoft_kotsu',
+      adapter: 'sails-mongo',
+      host: 'localhost',
+      port: 27017,
+      user: 'kotsu_backend',
+      password: '',
+      database: 'kotsu'
     },
 
   },
