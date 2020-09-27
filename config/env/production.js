@@ -13,7 +13,10 @@ module.exports = {
   },
 
   models: {
-    migrate: 'safe'
+    migrate: 'safe',
+    attributes: {
+      id: { type: 'string', columnName: '_id' }
+    }
   },
 
   blueprints: {

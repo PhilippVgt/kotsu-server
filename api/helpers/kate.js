@@ -81,24 +81,34 @@ module.exports = {
       $(timeTable).find(".time").each(function(index, elem) {
         if($(this).children().eq(fromColumn + 1).text() == '') return true;
 
+        var departureTime = new Date(inputs.date);
+        var departureParts = $(this).children().eq(fromColumn + 1).text().split(":");
+        if (departureParts.length == 2) {
+          departureTime.setHours(departureParts[0]);
+          departureTime.setMinutes(departureParts[1]);
+        } else {
+          //Do not continue processing when the time couldn't be parsed
+          return;
+        }
+
+        var arrivalTime = new Date(inputs.date);
+        var arrivalParts = $(this).children().eq(toColumn + 1).text().split(":");
+        if (arrivalParts.length == 2) {
+          arrivalTime.setHours(arrivalParts[0]);
+          arrivalTime.setMinutes(arrivalParts[1]);
+        } else {
+          //Do not continue processing when the time couldn't be parsed
+          return;
+        }
+
         departures[i] = {};
         departures[i]["origin"] = fromStop.id;
         departures[i]["destination"] = toStop.id;
         departures[i]["terminal"] = toStop.id;
 
         departures[i]["date"] = inputs.date;
-
-        var timeParts = $(this).children().eq(fromColumn + 1).text().split(":");
-        var departureTime = new Date(inputs.date);
-        departureTime.setHours(timeParts[0]);
-        departureTime.setMinutes(timeParts[1]);
-        departures[i]["hours"] = timeParts[0];
-        departures[i]["minutes"] = timeParts[1];
-
-        timeParts = $(this).children().eq(toColumn + 1).text().split(":");
-        var arrivalTime = new Date(inputs.date);
-        arrivalTime.setHours(timeParts[0]);
-        arrivalTime.setMinutes(timeParts[1]);
+        departures[i]["hours"] = departureParts[0];
+        departures[i]["minutes"] = departureParts[1];
 
         departures[i]["line"] = $(this).children(".company").first().text();
         departures[i]["platform"] = 0;
