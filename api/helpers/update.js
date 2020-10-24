@@ -17,6 +17,9 @@ module.exports = {
 
       for(const fromStop of stops) {
         for(const toStop of stops) {
+          if (fromStop.code == toStop.code) {
+            continue;
+          }
 
           const loaded = await Loaded.find({origin: fromStop.id, destination: toStop.id, date: date});
           if(loaded.length == 0) {
